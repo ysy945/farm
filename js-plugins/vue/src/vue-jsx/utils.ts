@@ -31,17 +31,15 @@ export function resolveExcludes(
 function resolveExclude(value: string | RegExp): RegExp {
   if (isString(value)) {
     return new RegExp(value);
-  }
-  if (isRegExp(value)) {
-    return value;
+  } else {
+    return value as RegExp;
   }
 }
 
 function resolveInclude(value: string | RegExp): string {
   if (isString(value)) {
     return value as string;
-  }
-  if (isRegExp(value)) {
+  } else {
     return value.toString().slice(1, -1);
   }
 }

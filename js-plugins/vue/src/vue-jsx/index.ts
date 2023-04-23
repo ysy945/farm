@@ -26,7 +26,7 @@ function vueJsxPlugin(options: Options = {}): JsPlugin {
 
   return {
     name: 'farm-vue-jsx-plugin',
-    config(config) {
+    config(config = {}) {
       config.define = {
         __VUE_OPTIONS_API__: config.define?.__VUE_OPTIONS_API__ ?? 'true',
         __VUE_PROD_DEVTOOLS__: config.define?.__VUE_PROD_DEVTOOLS__ ?? 'false',
@@ -217,7 +217,7 @@ function vueJsxPlugin(options: Options = {}): JsPlugin {
 }
 
 function parseComponentDecls(node: types.VariableDeclaration, source: string) {
-  const names = [];
+  const names: { name: string }[] = [];
   for (const decl of node.declarations) {
     if (decl.id.type === 'Identifier' && isDefineComponentCall(decl.init)) {
       names.push({
